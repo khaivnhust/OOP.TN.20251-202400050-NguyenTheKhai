@@ -1,0 +1,22 @@
+1. Tại sao cần thêm .settings/, bin/, .classpath, .project vào .gitignore?
+- Đây là các file/thư mục do IDE Eclipse tự động sinh ra, chỉ có ý nghĩa trên máy của owner.
+- Chúng chứa cấu hình cá nhân và khác nhau hoàn toàn giữa các máy nên nếu commit lên thì khi người khác pull về sẽ bị vài lỗi lặt vặt về importhoặc bị ghi đè cấu hình cá nhân.
+- Nếu không thêm vào .gitignore: repo sẽ bị bẩn, phình to không cần thiết, gây conflict liên tục, và người khác khó setup lại project.
+2. Nếu dùng IDE khác thì thêm những gì vào .gitignore?
+- IntelliJ IDEA:
+  .idea/
+  *.iml
+  out/
+- VS Code:
+  .vscode/
+  .classpath 
+  lib/
+3. Đã lỡ commit các file tạm lên rồi, giờ thêm vào .gitignore vẫn chưa đủ, làm sao để Git ngừng theo dõi chúng mà không xóa trên máy local?
+Thực hiện 3 bước
+Bước 1: Thêm các đường dẫn cần bỏ qua vào .gitignore
+Bước 2: Xóa chúng khỏi index của Git 
+git rm -r --cached .
+Bước 3: Commit lại lần cuối và push
+git add .
+git commit -m 
+git push
