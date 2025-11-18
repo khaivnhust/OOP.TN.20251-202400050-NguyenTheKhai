@@ -1,6 +1,8 @@
 package com.hust.kstn.models;
+
 import java.util.ArrayList;
 import java.util.List;
+
 public class CompactDisc {
     private static int nbCompactDisc = 0;
 
@@ -11,6 +13,8 @@ public class CompactDisc {
     private List<String> artists = new ArrayList<>();
     private String director;
     private List<Track> tracks = new ArrayList<>();
+
+
     public CompactDisc(String title, String category, double cost, 
                        List<String> artists, String director) {
         nbCompactDisc++;
@@ -21,10 +25,12 @@ public class CompactDisc {
         this.artists.addAll(artists);
         this.director = director;
     }
+
     public String getId() { return id; }
     public String getTitle() { return title; }
     public String getCategory() { return category; }
     public double getCost() { return cost; }
+
     public int totalLength() {
         int total = 0;
         for (Track t : tracks) {
@@ -32,6 +38,7 @@ public class CompactDisc {
         }
         return total;
     }
+
     public void addTrack(Track track) {
         if (track == null) {
             System.out.println("Cannot add null track!");
@@ -44,6 +51,7 @@ public class CompactDisc {
         tracks.add(track);
         System.out.println("Track \"" + track.getTitle() + "\" has been added.");
     }
+
     public void removeTrack(Track track) {
         if (track == null) {
             System.out.println("Cannot remove null track!");
@@ -55,6 +63,7 @@ public class CompactDisc {
             System.out.println("Track \"" + track.getTitle() + "\" not found!");
         }
     }
+
     @Override
     public String toString() {
         String result = "CompactDisc[" + id + "][" + title + "][" + category + "][" + cost + "][" + totalLength() + "]\n";
@@ -72,6 +81,7 @@ public class CompactDisc {
         for (int i = 0; i < tracks.size(); i++) {
             result += "  " + (i+1) + ". " + tracks.get(i).toString() + "\n";
         }
+
         return result;
     }
 }
