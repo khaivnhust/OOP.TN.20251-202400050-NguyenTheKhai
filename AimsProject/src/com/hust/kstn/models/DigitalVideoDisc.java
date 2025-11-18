@@ -41,3 +41,4 @@ public class DigitalVideoDisc {
     public int getLength() { return length; }
     public double getCost() { return cost; }
 }
+
