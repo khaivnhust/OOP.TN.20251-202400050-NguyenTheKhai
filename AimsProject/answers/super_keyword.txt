@@ -1,0 +1,2 @@
+Dùng để gọi constructor của lớp cha (Media). Khi tạo một đối tượng Book, trước tiên phải khởi tạo các thuộc tính id, title, cost, category của lớp Media. 
+Nếu không có dòng super(...) thì Java sẽ tự động gọi constructor không tham số của lớp cha → nhưng lớp Media không có constructor rỗng → lỗi biên dịch.
