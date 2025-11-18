@@ -1,0 +1,11 @@
+Câu 1: Điều gì xảy ra khi cùng lúc tồn tại hai phương thức sau trong lớp Cart?
+- addDVD(DigitalVideoDisc[] discs)
+- addDVD(DigitalVideoDisc... discs)
+Trình biên dịch Java sẽ báo lỗi ngay lập tức:
+  "Duplicate method addDVD(DigitalVideoDisc[]) in type Cart"
+Lý do: Trong Java, varargs (DigitalVideoDisc... discs) được xử lý ở mức biên dịch hoàn toàn giống như một mảng DigitalVideoDisc[] discs. 
+Do đó, chữ ký (signature) của hai phương thức này là giống hệt nhau nên vi phạm quy tắc overloading (không được có hai phương thức cùng tên và cùng danh sách tham số). 
+Nếu giữ cả hai, compiler không thể phân biệt được nên gọi phương thức nào khi người dùng truyền vào một mảng thực sự.
+
+Câu 2: Giải pháp bạn chọn và lý do?
+Xóa phương thức addDVD(DigitalVideoDisc[] discs) và chỉ giữ lại phương thức addDVD(DigitalVideoDisc... discs).
