@@ -9,9 +9,9 @@ public class CompactDisc extends Disc {
 
     public CompactDisc(String title, String category, double cost,
                        String director, List<String> artists) {
-        super(title, cost, category, director, 0); // length sẽ được tính sau
+        super(title, cost, category, director, 0); 
         this.artists.addAll(artists);
-        this.length = 0; // sẽ cập nhật khi add track
+        this.length = 0; 
     }
 
     public void addTrack(Track track) {
@@ -24,7 +24,7 @@ public class CompactDisc extends Disc {
             return;
         }
         tracks.add(track);
-        length += track.getLength(); // cập nhật tổng thời lượng
+        length += track.getLength(); 
         System.out.println("Track \"" + track.getTitle() + "\" added.");
     }
 
