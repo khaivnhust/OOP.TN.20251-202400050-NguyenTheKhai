@@ -1,0 +1,15 @@
+package com.hust.kstn.parameters;
+
+public class Student {
+    int studentId;
+    String name;
+
+    public Student(int studentId, String name) {
+        this.studentId = studentId;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}

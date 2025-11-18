@@ -1,0 +1,45 @@
+1.Tại sao sau khi gọi swap(s1, s2) thì tên của hai học sinh vẫn không đổi?
+Khi gọi swap(s1, s2), Java truyền bản sao (copy) của 2 tham chiếu (reference) vào phương thức.
+Bên trong swap(), các tham số o1 và o2 là 2 biến local, chỉ chứa bản sao của tham chiếu.
+Việc hoán đổi o1 ↔ o2 chỉ thay đổi 2 bản sao này, không ảnh hưởng gì đến biến s1 và s2 ở ngoài main().
+Do đó, sau khi swap() kết thúc, s1 vẫn trỏ tới đối tượng “A”, s2 vẫn trỏ tới đối tượng “B” → tên không đổi.
+2. Làm thế nào để phương thức swap thật sự tráo đổi được hai đối tượng?
+Cách 1 Thay đổi nội dung bên trong đối tượng (được dùng nhiều nhất)
+public static void swap(Student s1, Student s2) {
+    String tmpName = s1.name;
+    int tmpId      = s1.studentId;
+    s1.name       = s2.name;
+    s1.studentId  = s2.studentId;
+    s2.name       = tmpName;
+    s2.studentId  = tmpId;
+}
+Cách 2 – Dùng mảng 
+public static void swap(Student[] arr) {
+    Student tmp = arr[0];
+    arr[0] = arr[1];
+    arr[1] = tmp;
+} Gọi: swap(new Student[]{s1, s2});
+3. Sơ đồ bộ nhớ (stack & heap)
+Trước khi gọi swap():
+│     Stack       │    │      Heap       │
+-------------------------------------------
+│ main()          │    │                 │
+│   s1 ─────────────>│  Student{id=1,name="A"} │
+│   s2 ─────────────>│  Student{id=2,name="B"} │
+-------------------------------------------
+Khi vào swap(s1, s2) – truyền bản sao tham chiếu:=
+│     Stack       │    │      Heap       │
+---------------------------------------------
+│ main()          │    │ Student{id=1,"A"}│- s1 (bản gốc)
+│   s1 ───────┐   │    │ Student{id=2,"B"}│- s2 (bản gốc)
+│   s2 ───────┴──>│    └─────────────────┘
+│ swap()          │
+│   s1 ──────────>│ (cùng đối tượng “A”)
+│   s2 ──────────>│ (cùng đối tượng “B”)
+Sau khi thực hiện swap nội dung (cách 2):
+│     Stack       │    │      Heap       │
+-------------------------------------------
+│ main()          │    │ Student{id=2,name="B"} │- s1 (vẫn trỏ cũ nhưng nội dung đã đổi)
+│   s1 ──────────>│    │ Student{id=1,name="A"} │- s2
+│   s2 ──────────>│  
+Tham chiếu không đổi, nhưng nội dung trong heap đã bị tráo, in ra sẽ thấy đã swap thành công.
