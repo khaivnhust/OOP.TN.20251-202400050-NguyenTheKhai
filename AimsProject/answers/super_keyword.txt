@@ -1,0 +1,8 @@
+Câu 1
+Dùng để gọi constructor của lớp cha (Media). Khi tạo một đối tượng Book, trước tiên phải khởi tạo các thuộc tính id, title, cost, category của lớp Media. 
+Nếu không có dòng super(...) thì Java sẽ tự động gọi constructor không tham số của lớp cha → nhưng lớp Media không có constructor rỗng → lỗi biên dịch.
+Câu 2
+1. Tránh vấn đề "Diamond Problem" (vấn đề hình kim cương) – vấn đề chết người của đa kế thừa
+Giả sử lớp D kế thừa cả lớp B và lớp C, mà cả B và C đều kế thừa từ lớp A.
+Nếu A có phương thức m(), thì khi D gọi m() → compiler không biết phải gọi phiên bản của B hay của C → gây nhầm lẫn nghiêm trọng.
+2. Giữ ngôn ngữ đơn giản, rõ ràng và dễ bảo trì

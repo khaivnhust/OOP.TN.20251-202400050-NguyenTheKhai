@@ -3,40 +3,15 @@ package com.hust.kstn.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompactDisc {
-    private static int nbCompactDisc = 0;
-
-    private String id;
-    private String title;
-    private String category;
-    private double cost;
+public class CompactDisc extends Disc {
     private List<String> artists = new ArrayList<>();
-    private String director;
     private List<Track> tracks = new ArrayList<>();
 
-
-    public CompactDisc(String title, String category, double cost, 
-                       List<String> artists, String director) {
-        nbCompactDisc++;
-        this.id = "CD" + String.format("%04d", nbCompactDisc);
-        this.title = title;
-        this.category = category;
-        this.cost = cost;
+    public CompactDisc(String title, String category, double cost,
+                       String director, List<String> artists) {
+        super(title, cost, category, director, 0); 
         this.artists.addAll(artists);
-        this.director = director;
-    }
-
-    public String getId() { return id; }
-    public String getTitle() { return title; }
-    public String getCategory() { return category; }
-    public double getCost() { return cost; }
-
-    public int totalLength() {
-        int total = 0;
-        for (Track t : tracks) {
-            total += t.getLength();
-        }
-        return total;
+        this.length = 0; 
     }
 
     public void addTrack(Track track) {
@@ -45,43 +20,36 @@ public class CompactDisc {
             return;
         }
         if (tracks.contains(track)) {
-            System.out.println("Track \"" + track.getTitle() + "\" already exists!");
+            System.out.println("Track already exists!");
             return;
         }
         tracks.add(track);
-        System.out.println("Track \"" + track.getTitle() + "\" has been added.");
+        length += track.getLength(); 
+        System.out.println("Track \"" + track.getTitle() + "\" added.");
     }
 
     public void removeTrack(Track track) {
-        if (track == null) {
-            System.out.println("Cannot remove null track!");
-            return;
-        }
         if (tracks.remove(track)) {
-            System.out.println("Track \"" + track.getTitle() + "\" has been removed.");
+            length -= track.getLength();
+            System.out.println("Track \"" + track.getTitle() + "\" removed.");
         } else {
-            System.out.println("Track \"" + track.getTitle() + "\" not found!");
+            System.out.println("Track not found!");
         }
     }
 
     @Override
     public String toString() {
-        String result = "CompactDisc[" + id + "][" + title + "][" + category + "][" + cost + "][" + totalLength() + "]\n";
-        
+        String result = "CD[" + id + "][" + title + "][" + cost + "][" + category + 
+                       "][" + director + "][" + length + " min]\n";
         result += "Artists: ";
         for (int i = 0; i < artists.size(); i++) {
             result += artists.get(i);
             if (i < artists.size() - 1) result += ", ";
         }
-        result += "\n";
-
-        result += "Director: " + director + "\n";
-        
-        result += "Tracks:\n";
+        result += "\nTracks:\n";
         for (int i = 0; i < tracks.size(); i++) {
             result += "  " + (i+1) + ". " + tracks.get(i).toString() + "\n";
         }
-
         return result;
     }
 }

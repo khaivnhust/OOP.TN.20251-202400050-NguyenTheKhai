@@ -1,52 +1,27 @@
 package com.hust.kstn.models;
+
 import java.util.ArrayList;
 import java.util.List;
-public class Book {
-    private int id;
-    private String title;
-    private String category;
-    private float cost;
-    private int numOfTokens; 
-    private List<BookAuthor> authors = new ArrayList<>();
-    public Book(int id, String title, String category, float cost, int numOfTokens, List<BookAuthor> authors) {
-        this.id = id;
-        this.title = title;
-        this.category = category;
-        this.cost = cost;
+
+public class Book extends Media {
+    private List<String> authors = new ArrayList<>();
+    private int numOfTokens;
+
+    public Book(String title, double cost, String category, int numOfTokens, List<String> authors) {
+        super(title, cost, category);
         this.numOfTokens = numOfTokens;
-        this.authors = new ArrayList<>(authors);
+        this.authors.addAll(authors);
     }
-    public int getId() 
-    {
-        return id;
-    }
-    public String getTitle() 
-    {
-        return title;
-    }
-    public String getCategory() 
-    {
-        return category;
-    }
-    public float getCost() 
-    {
-        return cost;
-    }
-    public int getNumOfTokens() 
-    {
-        return numOfTokens;
-    }
-    public List<BookAuthor> getAuthors() 
-    {
-        return authors;
-    }
+
     @Override
     public String toString() {
-        return "Book[" + this.id + "][" 
-                + this.title + "][" 
-                + this.cost + "][" 
-                + this.category + "][" 
-                + this.numOfTokens + "]"
-                + "\nAuthors: " + this.authors;
+        String result = "Book[" + getId() + "][" + getTitle() + "][" + getCost() + "][" 
+                      + getCategory() + "][" + numOfTokens + "]\n";
+        result += "Authors: ";
+        for (int i = 0; i < authors.size(); i++) {
+            result += authors.get(i);
+            if (i < authors.size() - 1) result += ", ";
+        }
+        return result;
     }
 }
